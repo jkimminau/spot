@@ -53,6 +53,19 @@ class SpotMe extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState){
+        const { token } = this.statet
+
+        if (!prevState.token && token){
+            this.setState({
+                token: token,
+                geniusToken: "ZvXw3u46jpLx1qY-b8p0U4SAbyU4XCfIy5TcD1ITCJbxKUBQMwGH5h4bwJB3ntD6",
+            });
+            this.getCurrentSong(token)
+            this.getProfile(token)
+        }
+    }
+
     render(){
         const { token, currentSong } = this.state;
 
@@ -71,7 +84,7 @@ class SpotMe extends React.Component {
                 {currentSong &&
                     <div style={{display: 'flex', width: '100vw', height: '100vh', justifyContent: 'center', alignItems: 'center'}}>
                         <CurrentSong>
-                            <img style={{width: 'auto', height: '100%'}} src={currentSong.album.images[0].url} />
+                            <img alt="" style={{width: 'auto', height: '100%'}} src={currentSong.album.images[0].url} />
                             <div style={{ display: 'flex', flexDirection: 'column', fontSize: '12px', justifyContent: 'space-evenly', height: '100%' }}>
                                 <div>{currentSong.name}</div>
                                 <div>{currentSong.artists[0].name}</div>
